@@ -5,11 +5,9 @@ Created on Sun Jun 24 22:23:53 2018
 @author: front
 """
 import numpy as np
-from keras.datasets import mnist
-from keras.utils import np_utils
 from keras.models import model_from_json
 import test
-from keras.datasets import mnist
+import OutputNeuroNetwork as onn
 
 print("Загружаю сеть из файлов")
 
@@ -37,24 +35,7 @@ output = loaded_model.predict(X, batch_size=200, verbose=2, steps=None)
 
 #output = output / 255
 
-kat = 0 
-i = 0
-while i < 10:
-        if output[0,i] > kat:
-                kat = output[0,i]
-                answer = i
-        print(i, " = ", round(output[0,i] * 100, 2), '%')
-        i += 1
-
-if output[0, answer] * 100 > 75:
-        print('')
-        print("Нейросеть уверена, что это - ", answer)
-elif output[0, answer] * 100 > 65:
-        print('')
-        print("Нейросеть считает, что это - ", answer)
-else:
-        print('')
-        print("Нейросеть предполагает, что это - ", answer)
+answer = onn.OutputNeuroNetwork(output)
         
 userAns = int(input('Даже если ответ нейронной сети совпадает,' 
               '\nвсё-равно введите ответ, '
@@ -102,4 +83,12 @@ if userAns != answer:
         loaded_model.save_weights("mnist_model.h5")
         
         print("Сохранение сети завершено")
+        
+        output = loaded_model.predict(X, batch_size=200, verbose=2, steps=None)
+        
+        answer = onn.OutputNeuroNetwork(output)
+        
+print('Нейросеть окончила свою работу')
+        
+        
     
