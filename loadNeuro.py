@@ -27,7 +27,7 @@ print("Загрузка сети завершена")
 # Загружаем данные
 (X_train, y_train), (X_test, y_test) = mnist.load_data()
 
-print(y_train[0])
+
 
 # Преобразование размерности изображений
 X_train = X_train.reshape(60000, 784)
@@ -41,14 +41,15 @@ X_test = X_test.astype('float32')
 X_train /= 255
 X_test /= 255
 
-
+print(y_test[0])
 
 # Преобразуем метки в категории
 Y_train = np_utils.to_categorical(y_train, 10)
 Y_test = np_utils.to_categorical(y_test, 10)
-print(y_train[0])
 
-print(type(y_train[0]), type(X_test[0][0]))
+print(y_test[1])
+print(type(y_test[0]))
+print(y_test[0].shape)
 # Компилируем загруженную модель
 loaded_model.compile(loss="categorical_crossentropy", optimizer="SGD", metrics=["accuracy"])
 

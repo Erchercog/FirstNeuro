@@ -40,7 +40,6 @@ def main():
 #        for()
 #        PhotoBinary = bin(arr[1,1,1])
         
-        print(arr[27][27])
         
         arr = arr.reshape(1, 784)
         

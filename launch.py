@@ -9,6 +9,7 @@ from keras.datasets import mnist
 from keras.utils import np_utils
 from keras.models import model_from_json
 import test
+from keras.datasets import mnist
 
 print("Загружаю сеть из файлов")
 
@@ -54,3 +55,62 @@ elif output[0, answer] * 100 > 65:
 else:
         print('')
         print("Нейросеть предполагает, что это - ", answer)
+        
+userAns = int(input('Даже если ответ нейронной сети совпадает,' 
+              '\nвсё-равно введите ответ, '
+              '\nэто поможет нейросети развиваться: '))
+if userAns == 0:
+        Check = np.uint8([[1, 0, 0, 0, 0, 0, 0, 0, 0, 0]])
+elif userAns == 1:
+        Check = np.uint8([[0, 1, 0, 0, 0, 0, 0, 0, 0, 0]])
+elif userAns == 2:
+        Check = np.uint8([[0, 0, 1, 0, 0, 0, 0, 0, 0, 0]])
+elif userAns == 3:
+        Check = np.uint8([[0, 0, 0, 1, 0, 0, 0, 0, 0, 0]])
+elif userAns == 4:
+        Check = np.uint8([[0, 0, 0, 0, 1, 0, 0, 0, 0, 0]])
+elif userAns == 5:
+        Check = np.uint8([[0, 0, 0, 0, 0, 1, 0, 0, 0, 0]])
+elif userAns == 6:
+        Check = np.uint8([[0, 0, 0, 0, 0, 0, 1, 0, 0, 0]])
+elif userAns == 7:
+        Check = np.uint8([[0, 0, 0, 0, 0, 0, 0, 1, 0, 0]])
+elif userAns == 8:
+        Check = np.uint8([[0, 0, 0, 0, 0, 0, 0, 0, 1, 0]])
+elif userAns == 9:
+        Check = np.uint8([[0, 0, 0, 0, 0, 0, 0, 0, 0, 1]])
+
+print(Check.shape)
+print(type(Check))  
+
+print(X.shape)
+print(type(X))  
+
+if userAns != answer:
+        print('Нейросеть обучается...')
+#        
+##        data = np.random.random((1, 784))
+#        labels = np.random.randint(2, size=(1, 10))
+#        
+##        print(data.shape)
+##        print(type(data))  
+##        
+#        print(labels.shape)
+#        print(type(labels)) 
+        loaded_model.fit(X, Check, epochs=2, batch_size=200)
+        print("Сохраняем сеть")
+
+        # Сохраняем сеть для последующего использования
+        # Генерируем описание модели в формате json
+        model_json = loaded_model.to_json()
+        json_file = open("mnist_model.json", "w")
+        
+        # Записываем архитектуру сети в файл
+        json_file.write(model_json)
+        json_file.close()
+        
+        # Записываем данные о весах в файл
+        loaded_model.save_weights("mnist_model.h5")
+        
+        print("Сохранение сети завершено")
+    
