@@ -59,6 +59,8 @@ else:
 userAns = int(input('Даже если ответ нейронной сети совпадает,' 
               '\nвсё-равно введите ответ, '
               '\nэто поможет нейросети развиваться: '))
+
+//С этим костылём в дальнейшем разобраться...
 if userAns == 0:
         Check = np.uint8([[1, 0, 0, 0, 0, 0, 0, 0, 0, 0]])
 elif userAns == 1:
@@ -80,24 +82,11 @@ elif userAns == 8:
 elif userAns == 9:
         Check = np.uint8([[0, 0, 0, 0, 0, 0, 0, 0, 0, 1]])
 
-print(Check.shape)
-print(type(Check))  
-
-print(X.shape)
-print(type(X))  
-
 if userAns != answer:
         print('Нейросеть обучается...')
-#        
-##        data = np.random.random((1, 784))
-#        labels = np.random.randint(2, size=(1, 10))
-#        
-##        print(data.shape)
-##        print(type(data))  
-##        
-#        print(labels.shape)
-#        print(type(labels)) 
+
         loaded_model.fit(X, Check, epochs=2, batch_size=200)
+        
         print("Сохраняем сеть")
 
         # Сохраняем сеть для последующего использования

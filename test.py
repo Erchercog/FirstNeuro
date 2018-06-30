@@ -37,9 +37,7 @@ def main():
 #        print('img = ', img)
         arr = np.asarray(img, dtype='uint8')
         
-#        for()
-#        PhotoBinary = bin(arr[1,1,1])
-        
+
         
         arr = arr.reshape(1, 784)
         
