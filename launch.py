@@ -12,6 +12,7 @@ import OutputNeuroNetwork as onn
 print("Загружаю сеть из файлов")
 
 # Загружаем данные об архитектуре сети
+
 json_file = open("mnist_model.json", "r")
 loaded_model_json = json_file.read()
 json_file.close()
@@ -41,27 +42,9 @@ userAns = int(input('Даже если ответ нейронной сети с
               '\nвсё-равно введите ответ, '
               '\nэто поможет нейросети развиваться: '))
 
-#С этим костылём в дальнейшем разобраться...
-if userAns == 0:
-        Check = np.uint8([[1, 0, 0, 0, 0, 0, 0, 0, 0, 0]])
-elif userAns == 1:
-        Check = np.uint8([[0, 1, 0, 0, 0, 0, 0, 0, 0, 0]])
-elif userAns == 2:
-        Check = np.uint8([[0, 0, 1, 0, 0, 0, 0, 0, 0, 0]])
-elif userAns == 3:
-        Check = np.uint8([[0, 0, 0, 1, 0, 0, 0, 0, 0, 0]])
-elif userAns == 4:
-        Check = np.uint8([[0, 0, 0, 0, 1, 0, 0, 0, 0, 0]])
-elif userAns == 5:
-        Check = np.uint8([[0, 0, 0, 0, 0, 1, 0, 0, 0, 0]])
-elif userAns == 6:
-        Check = np.uint8([[0, 0, 0, 0, 0, 0, 1, 0, 0, 0]])
-elif userAns == 7:
-        Check = np.uint8([[0, 0, 0, 0, 0, 0, 0, 1, 0, 0]])
-elif userAns == 8:
-        Check = np.uint8([[0, 0, 0, 0, 0, 0, 0, 0, 1, 0]])
-elif userAns == 9:
-        Check = np.uint8([[0, 0, 0, 0, 0, 0, 0, 0, 0, 1]])
+#Преобразуем ответ к нужному виду
+Check = np.uint8([[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]])
+Check[0][userAns] = 1
 
 if userAns != answer:
         print('Нейросеть обучается...')

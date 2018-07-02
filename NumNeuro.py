@@ -49,7 +49,7 @@ print(model.summary())
 early_stopping=EarlyStopping(monitor='val_loss') 
 
 # Обучаем сеть
-model.fit(X_train, Y_train, batch_size=200, epochs=300, validation_split=0.2, verbose=2, callbacks=[early_stopping])
+model.fit(X_train, Y_train, batch_size=200, epochs=200, validation_split=0.2, verbose=2, callbacks=[early_stopping])
 
 # Оцениваем качество обучения сети на тестовых данных
 scores = model.evaluate(X_test, Y_test, verbose=0)
