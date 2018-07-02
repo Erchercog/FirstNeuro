@@ -37,12 +37,21 @@ output = loaded_model.predict(X, batch_size=200, verbose=2, steps=None)
 #output = output / 255
 
 answer = onn.OutputNeuroNetwork(output)
-        
-userAns = int(input('Даже если ответ нейронной сети совпадает,' 
-              '\nвсё-равно введите ответ, '
-              '\nэто поможет нейросети развиваться: '))
+i = 0
+while i == 0:
+        i = 1
+        userAnsSTR = input('Даже если ответ нейронной сети совпадает,' 
+                      '\nвсё-равно введите ответ, '
+                      '\nэто поможет нейросети развиваться: ')
+        try:
+                userAns = int(userAnsSTR)
+        except:
+                i = 0
 
-#Преобразуем ответ к нужному виду
+while userAns > 10 and userAns <= 0:
+        userAns = int(input('Ответ неправильный, введите его заново '
+                            '(результат должен быть от 0 до 9): '))
+#4Преобразуем ответ к нужному виду
 Check = np.uint8([[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]])
 Check[0][userAns] = 1
 
